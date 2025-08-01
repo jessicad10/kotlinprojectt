@@ -64,8 +64,8 @@ fun WishlistScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Your Wishlist", fontSize = 20.sp) },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFF4CAF50))
+                title = { Text("Your Wishlist", fontSize = 20.sp, color = Color.Black) },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White)
             )
         }
     ) { padding ->
@@ -73,7 +73,7 @@ fun WishlistScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
-                .background(Color(0xFFF0F0F0))
+                .background(Color.White)
         ) {
             if (wishlistItems.isEmpty()) {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {

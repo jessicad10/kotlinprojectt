@@ -71,7 +71,7 @@ fun RegBody(innerPaddingValues: PaddingValues) {
         modifier = Modifier
             .padding(innerPaddingValues)
             .fillMaxSize()
-            .background(Color.Green)
+            .background(Color.White)
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,

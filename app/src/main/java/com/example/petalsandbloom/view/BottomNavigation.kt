@@ -91,7 +91,7 @@ fun NavigationBody() {
                 )
         },
         bottomBar = {
-            NavigationBar {
+            NavigationBar(containerColor = Color(0xFFFFE4E1)) {
                 bottomNavItems.forEachIndexed { index, item ->
                     NavigationBarItem(
                         icon = { Icon(item.icon, contentDescription = item.label) },

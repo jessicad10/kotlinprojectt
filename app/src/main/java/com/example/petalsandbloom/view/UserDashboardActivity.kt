@@ -142,77 +142,29 @@ fun UserDashboardBody(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Image(
-                            painter = painterResource(id = R.drawable.petals_bloom_logo),
-                            contentDescription = "Petals & Bloom Logo",
-                            modifier = Modifier
-                                .size(55.dp)
-                                .clip(CircleShape)
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text("Petals & Bloom")
-                    }},
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF4CAF50),
-                    titleContentColor = Color.White
-                ),
-                actions = {
-                    IconButton(onClick = {
-                        context.startActivity(Intent(context, EditProfileActivity::class.java))
-                    }) {
-                        Icon(Icons.Default.Person, contentDescription = "Edit Profile", tint = Color.White)
-                    }
-                    Box {
-                        IconButton(onClick = { menuExpanded = true }) {
-                            Icon(Icons.Default.MoreVert, contentDescription = "Menu", tint = Color.White)
-                        }
-                        DropdownMenu(
-                            expanded = menuExpanded,
-                            onDismissRequest = { menuExpanded = false }
-                        ) {
-                            DropdownMenuItem(
-                                text = { Text("Address Book") },
-                                onClick = {
-                                    menuExpanded = false
-                                    context.startActivity(Intent(context, AddressActivity::class.java))
-                                }
-                            )
-                            DropdownMenuItem(
-                                text = { Text("Logout") },
-                                onClick = {
-                                    menuExpanded = false
-                                    Toast.makeText(context, "Logged out", Toast.LENGTH_SHORT).show()
-                                    val intent = Intent(context, LoginActivity::class.java)
-                                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                    context.startActivity(intent)
-                                }
-                            )
-                        }
-                    }
-                }
+                title = { Text("User Dashboard", color = Color.Black) },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White)
             )
         },
         bottomBar = {
-            NavigationBar(containerColor = Color(0xFF4CAF50)) {
+            NavigationBar(containerColor = Color(0xFFFFE4E1)) {
                 NavigationBarItem(
                     selected = true,
                     onClick = {},
-                    icon = { Icon(Icons.Default.Home, contentDescription = "Home", tint = Color.White) },
-                    label = { Text("Home", color = Color.White) }
+                    icon = { Icon(Icons.Default.Home, contentDescription = "Home", tint = Color.Black) },
+                    label = { Text("Home", color = Color.Black) }
                 )
                 NavigationBarItem(
                     selected = false,
                     onClick = { context.startActivity(Intent(context, CartActivity::class.java)) },
-                    icon = { Icon(Icons.Default.ShoppingCart, contentDescription = "Cart", tint = Color.White) },
-                    label = { Text("Cart", color = Color.White) }
+                    icon = { Icon(Icons.Default.ShoppingCart, contentDescription = "Cart", tint = Color.Black) },
+                    label = { Text("Cart", color = Color.Black) }
                 )
                 NavigationBarItem(
                     selected = false,
                     onClick = { context.startActivity(Intent(context, WishlistActivity::class.java)) },
-                    icon = { Icon(Icons.Default.FavoriteBorder, contentDescription = "Wishlist", tint = Color.White) },
-                    label = { Text("Wishlist", color = Color.White) }
+                    icon = { Icon(Icons.Default.FavoriteBorder, contentDescription = "Wishlist", tint = Color.Black) },
+                    label = { Text("Wishlist", color = Color.Black) }
                 )
             }
         }
@@ -237,7 +189,7 @@ fun UserDashboardBody(
                         .padding(horizontal = 12.dp, vertical = 4.dp)
                 )
 
-                val categories = listOf("All", "Cricket", "Football", "Rugby", "Tennis")
+                val categories = listOf("All", "Tulips", "Sunflower", "Lillies", "Daisy")
 
                 LazyRow(
                     modifier = Modifier

@@ -68,7 +68,7 @@ fun DashboardBody(cartViewModel: CartViewModel) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Admin Dashboard", color = Color.White) },
+                title = { Text("Admin Dashboard", color = Color.Black) },
                 actions = {
                     IconButton(onClick = {
                         // If using Firebase: FirebaseAuth.getInstance().signOut()
@@ -77,10 +77,10 @@ fun DashboardBody(cartViewModel: CartViewModel) {
                         context.startActivity(intent)
                         Toast.makeText(context, "Logged out successfully", Toast.LENGTH_SHORT).show()
                     }) {
-                        Icon(Icons.Default.ExitToApp, contentDescription = "Logout", tint = Color.White)
+                        Icon(Icons.Default.ExitToApp, contentDescription = "Logout", tint = Color.Black)
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Green)
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White)
             )
         },
         floatingActionButton = {
@@ -92,7 +92,7 @@ fun DashboardBody(cartViewModel: CartViewModel) {
             }
         },
         bottomBar = {
-            NavigationBar(containerColor = Green) {
+            NavigationBar(containerColor = Color(0xFFFFE4E1)) {
                 NavigationBarItem(
                     selected = selectedTab == 0,
                     onClick = { selectedTab = 0 },
@@ -115,13 +115,13 @@ fun DashboardBody(cartViewModel: CartViewModel) {
             LazyColumn(
                 modifier = Modifier
                     .padding(innerPadding)
-                    .background(color = Green)
+                    .background(color = Color.White)
             ) {
                 if (loading.value) {
                     item {
                         Text(
                             text = "Loading products...",
-                            color = Color.White,
+                            color = Color.Black,
                             modifier = Modifier.padding(16.dp)
                         )
                     }

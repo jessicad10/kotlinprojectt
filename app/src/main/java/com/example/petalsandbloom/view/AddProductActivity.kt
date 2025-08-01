@@ -83,7 +83,7 @@ fun AddProductBody(
                 .fillMaxSize()
                 .padding(innerPadding)
                 .padding(10.dp)
-                .background(color = Color(0xFFA5D6A7)) // light green
+                .background(color = Color.White) // white
         ) {
             item {
                 // Image Picker
