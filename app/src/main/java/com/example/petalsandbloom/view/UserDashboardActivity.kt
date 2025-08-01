@@ -41,7 +41,7 @@ import com.cloudinary.android.callback.ErrorInfo
 import com.cloudinary.android.callback.UploadCallback
 import com.example.petalsandbloom.repository.*
 import com.example.petalsandbloom.viewmodel.*
-import com.example.petalsandbloom.LoginActivity
+
 import com.example.petalsandbloom.R
 import com.example.petalsandbloom.model.CartItemModel
 import com.example.petalsandbloom.model.ProductModel
@@ -146,13 +146,13 @@ fun UserDashboardBody(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Image(
                             painter = painterResource(id = R.drawable.petals_bloom_logo),
-                            contentDescription = "RetroCrug Logo",
+                            contentDescription = "Petals & Bloom Logo",
                             modifier = Modifier
                                 .size(55.dp)
                                 .clip(CircleShape)
                         )
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text("RetroCrugSports")
+                        Text("Petals & Bloom")
                     }},
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = Color(0xFF4CAF50),

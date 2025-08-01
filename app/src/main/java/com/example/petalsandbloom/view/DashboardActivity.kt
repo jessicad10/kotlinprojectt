@@ -23,7 +23,7 @@ import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
-import com.example.petalsandbloom.LoginActivity
+
 import com.example.petalsandbloom.repository.CartRepositoryImpl
 import com.example.petalsandbloom.repository.ProductRepositoryImpl
 import com.example.petalsandbloom.viewmodel.CartViewModel

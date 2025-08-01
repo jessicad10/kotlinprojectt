@@ -1,5 +1,4 @@
-
-package com.example.petalsandbloom
+package com.example.petalsandbloom.view
 
 import android.app.Activity
 import android.content.Context
@@ -32,6 +31,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.petalsandbloom.R
 import com.example.petalsandbloom.view.UserDashboardActivity
 import com.example.petalsandbloom.repository.UserRepositoryImplementation
 import com.example.petalsandbloom.view.*
@@ -76,12 +76,12 @@ fun LoginBody() {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
-                .background(color = Color.Green),
+                .background(color = Color.White),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(50.dp))
             Text(
-                text = "RetroCrugSports",
+                text = "Petals & Bloom",
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.Black,
