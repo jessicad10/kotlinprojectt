@@ -167,28 +167,44 @@ fun LoginBody() {
 
             Button(
                 onClick = {
-                    userViewModel.login(email, password) { success, message ->
-                        if (success) {
-                            Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+                    // Check for admin credentials first
+                    if (email == "nia@gmail.com" && password == "nia123") {
+                        Toast.makeText(context, "Admin login successful", Toast.LENGTH_LONG).show()
+                        val intent = Intent(context, DashboardActivity::class.java)
+                        context.startActivity(intent)
+                        
+                        if (rememberMe) {
+                            editor.putString("email", email)
+                            editor.putString("password", password)
+                            editor.apply()
+                        }
+                        
+                        activity.finish()
+                    } else {
+                        // Regular user login
+                        userViewModel.login(email, password) { success, message ->
+                            if (success) {
+                                Toast.makeText(context, message, Toast.LENGTH_LONG).show()
 
-                            if (email == "ram@gmail.com") {
-                                val intent = Intent(context, DashboardActivity::class.java)
-                                context.startActivity(intent)
+                                if (email == "ram@gmail.com") {
+                                    val intent = Intent(context, DashboardActivity::class.java)
+                                    context.startActivity(intent)
+                                } else {
+                                    val intent = Intent(context, UserDashboardActivity::class.java)
+                                    context.startActivity(intent)
+                                }
+
+                                if (rememberMe) {
+                                    editor.putString("email", email)
+                                    editor.putString("password", password)
+                                    editor.apply()
+                                }
+
+                                activity.finish()
                             } else {
-                                val intent = Intent(context, UserDashboardActivity::class.java)
-                                context.startActivity(intent)
-                            }
-
-                            if (rememberMe) {
-                                editor.putString("email", email)
-                                editor.putString("password", password)
-                                editor.apply()
-                            }
-
-                            activity.finish()
-                        } else {
-                            coroutineScope.launch {
-                                snackbarHostState.showSnackbar("Invalid login: $message")
+                                coroutineScope.launch {
+                                    snackbarHostState.showSnackbar("Invalid login: $message")
+                                }
                             }
                         }
                     }

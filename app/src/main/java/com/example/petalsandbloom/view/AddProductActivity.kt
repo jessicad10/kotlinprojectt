@@ -67,7 +67,7 @@ fun AddProductBody(
     var pDesc by remember { mutableStateOf("") }
     var pCategory by remember { mutableStateOf("Cricket") }
 
-    val categories = listOf("Cricket", "Football", "Tennis", "Rugby", "Badminton")
+    val categories = listOf("Roses", "Tulips", "Lillies", "Sunflower", "Daisy")
 
     val repo = remember { ProductRepositoryImpl() }
     val viewModel = remember { ProductViewModel(repo) }
