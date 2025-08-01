@@ -2,6 +2,7 @@ package com.example.petalsandbloom.model
 
 
 data class CartItemModel(
+
     var id: String = "",
     var productId: String = "",
     var productName: String = "",
