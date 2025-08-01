@@ -11,7 +11,10 @@ class AddressRepositoryImpl : AddressRepository {
 
     override fun addAddress(address: AddressModel, callback: (Boolean, String) -> Unit) {
         collection.document(address.id).set(address)
+
             .addOnSuccessListener { callback(true, "Address saved") }
+
+
             .addOnFailureListener { callback(false, "Error saving address") }
     }
 

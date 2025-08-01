@@ -9,6 +9,8 @@ import com.google.firebase.database.*
 class CartRepositoryImpl : CartRepository {
 
     private val auth = FirebaseAuth.getInstance()
+
+
     private val db = FirebaseDatabase.getInstance()
     private val userId: String
         get() = auth.currentUser?.uid ?: "guest_user"
