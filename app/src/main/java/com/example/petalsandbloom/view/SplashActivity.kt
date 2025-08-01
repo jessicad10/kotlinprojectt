@@ -68,6 +68,7 @@ fun SplashBody() {
 @Preview
 @Composable
 fun PreviewSplash() {
+
     SplashBody()
 }
 //nice
