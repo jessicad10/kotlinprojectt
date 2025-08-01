@@ -27,6 +27,7 @@ import com.example.petalsandbloom.repository.UserRepositoryImplementation
 import com.example.petalsandbloom.viewmodel.UserViewModel
 
 class ForgetPasswordActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
