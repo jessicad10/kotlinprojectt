@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "410034910194",
+    "firebase_url": "https://flower-shop-60468-default-rtdb.firebaseio.com",
+    "project_id": "flower-shop-60468",
+    "storage_bucket": "flower-shop-60468.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410034910194:android:8dc4c1c7cc9a3caf97b16b",
+        "android_client_info": {
+          "package_name": "com.example.petalsandbloom"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABasp9LDZKCW0R80WwwDO8N9OfjyQTSK0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

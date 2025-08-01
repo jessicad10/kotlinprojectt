@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">petalsandbloom</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_forget_password">ForgetPassword</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_order">OrderActivity</string>
+    <string name="title_activity_add_product">AddProductActivity</string>
+    <string name="title_activity_address">AddressActivity</string>
+    <string name="title_activity_bottom_navigation">BottomNavigation</string>
+    <string name="title_activity_cart">CartActivity</string>
+    <string name="title_activity_edit_profile">EditProfileActivity</string>
+    <string name="title_activity_update_product">UpdateProductActivity</string>
+    <string name="title_activity_user_dashboard">UserDashboardActivity</string>
+    <string name="title_activity_user_order">UserOrderActivity</string>
+    <string name="title_activity_wishlist">WishlistActivity</string>
+</resources>
