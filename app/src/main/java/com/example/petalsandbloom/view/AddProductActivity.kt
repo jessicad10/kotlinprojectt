@@ -22,6 +22,7 @@ import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -65,7 +66,7 @@ fun AddProductBody(
     var pName by remember { mutableStateOf("") }
     var pPrice by remember { mutableStateOf("") }
     var pDesc by remember { mutableStateOf("") }
-    var pCategory by remember { mutableStateOf("Cricket") }
+    var pCategory by remember { mutableStateOf("Roses") }
 
     val categories = listOf("Roses", "Tulips", "Lillies", "Sunflower", "Daisy")
 
@@ -87,32 +88,54 @@ fun AddProductBody(
         ) {
             item {
                 // Image Picker
-                Box(
+                Card(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(200.dp)
+                        .padding(10.dp)
                         .clickable(
                             indication = null,
                             interactionSource = remember { MutableInteractionSource() }
                         ) {
+                            Log.d("AddProductActivity", "Image picker clicked - starting at ${System.currentTimeMillis()}")
+                            Toast.makeText(context, "Opening image picker...", Toast.LENGTH_SHORT).show()
                             onPickImage()
-                        }
-                        .padding(10.dp)
+                            Log.d("AddProductActivity", "Image picker launch initiated at ${System.currentTimeMillis()}")
+                        },
+                    colors = CardDefaults.cardColors(containerColor = Color.LightGray),
+                    elevation = CardDefaults.cardElevation(4.dp)
                 ) {
-                    if (selectedImageUri != null) {
-                        AsyncImage(
-                            model = selectedImageUri,
-                            contentDescription = "Selected Image",
-                            modifier = Modifier.fillMaxSize(),
-                            contentScale = ContentScale.Crop
-                        )
-                    } else {
-                        Image(
-                            painterResource(R.drawable.placeholder),
-                            contentDescription = null,
-                            modifier = Modifier.fillMaxSize(),
-                            contentScale = ContentScale.Crop
-                        )
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        if (selectedImageUri != null) {
+                            AsyncImage(
+                                model = selectedImageUri,
+                                contentDescription = "Selected Image",
+                                modifier = Modifier.fillMaxSize(),
+                                contentScale = ContentScale.Crop
+                            )
+                        } else {
+                            Column(
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Image(
+                                    painterResource(R.drawable.placeholder),
+                                    contentDescription = "Click to select image",
+                                    modifier = Modifier
+                                        .size(80.dp)
+                                        .padding(bottom = 8.dp),
+                                    contentScale = ContentScale.Fit
+                                )
+                                Text(
+                                    text = "Tap to select image",
+                                    color = Color.Gray,
+                                    modifier = Modifier.padding(8.dp)
+                                )
+                            }
+                        }
                     }
                 }
 

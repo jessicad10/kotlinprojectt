@@ -32,6 +32,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelProvider
 import coil.compose.AsyncImage
 import coil.request.CachePolicy
@@ -53,12 +54,14 @@ import com.example.petalsandbloom.repository.UserRepositoryImplementation
 import com.example.petalsandbloom.repository.WishlistRepositoryImpl
 import com.example.petalsandbloom.viewmodel.CartViewModel
 import com.example.petalsandbloom.viewmodel.CartViewModelFactory
+import com.example.petalsandbloom.viewmodel.OrderViewModel
 import com.example.petalsandbloom.viewmodel.OrderViewModelFactory
 import com.example.petalsandbloom.viewmodel.ProductViewModel
 import com.example.petalsandbloom.viewmodel.UserViewModel
 import com.example.petalsandbloom.viewmodel.UserViewModelFactory
 import com.example.petalsandbloom.viewmodel.WishlistViewModel
 import com.example.petalsandbloom.viewmodel.WishlistViewModelFactory
+import com.example.petalsandbloom.utils.ImageUtils
 import com.google.firebase.auth.FirebaseAuth
 
 import com.google.firebase.database.FirebaseDatabase
@@ -69,9 +72,13 @@ class UserDashboardActivity : ComponentActivity() {
     private lateinit var wishlistViewModel: WishlistViewModel
     private lateinit var userViewModel: UserViewModel
     private lateinit var orderViewModel: OrderViewModel
+    private lateinit var imageUtils: ImageUtils
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Initialize ImageUtils
+        imageUtils = ImageUtils(this, this)
 
         // Initialize Cloudinary with your credentials
         val cloudinaryConfig = mapOf(
@@ -89,7 +96,7 @@ class UserDashboardActivity : ComponentActivity() {
         orderViewModel = ViewModelProvider(this, OrderViewModelFactory(OrderRepositoryImpl()))[OrderViewModel::class.java]
 
         setContent {
-            UserDashboardBody(cartViewModel, wishlistViewModel, userViewModel, orderViewModel)
+            UserDashboardBody(cartViewModel, wishlistViewModel, userViewModel, orderViewModel, imageUtils)
         }
     }
 
@@ -109,7 +116,8 @@ fun UserDashboardBody(
     cartViewModel: CartViewModel,
     wishlistViewModel: WishlistViewModel,
     userViewModel: UserViewModel,
-    orderViewModel: OrderViewModel
+    orderViewModel: OrderViewModel,
+    imageUtils: ImageUtils
 ) {
     val context = LocalContext.current
     val productRepo = remember { ProductRepositoryImpl() }
@@ -143,7 +151,26 @@ fun UserDashboardBody(
         topBar = {
             TopAppBar(
                 title = { Text("User Dashboard", color = Color.Black) },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White)
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White),
+                actions = {
+                    // Edit Profile Button
+                    IconButton(onClick = {
+                        context.startActivity(Intent(context, EditProfileActivity::class.java))
+                    }) {
+                        Icon(Icons.Default.Person, contentDescription = "Edit Profile", tint = Color.Black)
+                    }
+                    
+                    // Logout Button
+                    IconButton(onClick = {
+                        FirebaseAuth.getInstance().signOut()
+                        Toast.makeText(context, "Logged out successfully", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(context, LoginActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        context.startActivity(intent)
+                    }) {
+                        Icon(Icons.Default.ExitToApp, contentDescription = "Logout", tint = Color.Black)
+                    }
+                }
             )
         },
         bottomBar = {
@@ -189,7 +216,7 @@ fun UserDashboardBody(
                         .padding(horizontal = 12.dp, vertical = 4.dp)
                 )
 
-                val categories = listOf("All", "Tulips", "Sunflower", "Lillies", "Daisy")
+                val categories = listOf("All", "Roses", "Tulips", "Lillies", "Sunflower", "Daisy")
 
                 LazyRow(
                     modifier = Modifier
@@ -224,7 +251,7 @@ fun UserDashboardBody(
                 LazyColumn(modifier = Modifier.padding(8.dp)) {
                     items(filteredProducts) { product ->
                         product?.let {
-                            ProductCard(it, cartViewModel, wishlistViewModel, context)
+                            ProductCard(it, cartViewModel, wishlistViewModel, imageUtils, context)
                         }
                     }
                 }
@@ -282,6 +309,7 @@ fun ProductCard(
     product: ProductModel,
     cartViewModel: CartViewModel,
     wishlistViewModel: WishlistViewModel,
+    imageUtils: ImageUtils,
     context: android.content.Context
 ) {
     Card(
@@ -353,16 +381,32 @@ fun ProductCard(
                     Text("Add to Cart")
                 }
 
-                IconButton(onClick = {
-                    val wishlistItem = WishlistItemModel(
-                        productName = product.productName ?: "",
-                        productPrice = product.productPrice ?: 0.0,
-                        image = product.image ?: ""
-                    )
-                    wishlistViewModel.addToWishlist(wishlistItem)
-                    Toast.makeText(context, "Added to wishlist", Toast.LENGTH_SHORT).show()
-                }) {
-                    Icon(Icons.Default.FavoriteBorder, contentDescription = "Wishlist", tint = Color.Red)
+                Row {
+                    IconButton(onClick = {
+                        val wishlistItem = WishlistItemModel(
+                            productName = product.productName ?: "",
+                            productPrice = product.productPrice ?: 0.0,
+                            image = product.image ?: ""
+                        )
+                        wishlistViewModel.addToWishlist(wishlistItem)
+                        Toast.makeText(context, "Added to wishlist", Toast.LENGTH_SHORT).show()
+                    }) {
+                        Icon(Icons.Default.FavoriteBorder, contentDescription = "Wishlist", tint = Color.Red)
+                    }
+                    
+                    IconButton(onClick = {
+                        product.image?.let { imageUrl ->
+                            imageUtils.saveImageToPhone(context, imageUrl) { success, message ->
+                                if (success) {
+                                    Toast.makeText(context, "Image saved successfully!", Toast.LENGTH_LONG).show()
+                                } else {
+                                    Toast.makeText(context, "Failed to save image: $message", Toast.LENGTH_LONG).show()
+                                }
+                            }
+                        }
+                    }) {
+                        Icon(Icons.Default.Add, contentDescription = "Save Image", tint = Color.Blue)
+                    }
                 }
             }
         }

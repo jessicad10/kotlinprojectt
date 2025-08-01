@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -167,8 +168,11 @@ fun LoginBody() {
 
             Button(
                 onClick = {
+                    Log.d("LoginActivity", "Login button clicked with email: $email")
+                    
                     // Check for admin credentials first
                     if (email == "nia@gmail.com" && password == "nia123") {
+                        Log.d("LoginActivity", "Admin credentials detected")
                         Toast.makeText(context, "Admin login successful", Toast.LENGTH_LONG).show()
                         val intent = Intent(context, DashboardActivity::class.java)
                         context.startActivity(intent)
@@ -181,8 +185,10 @@ fun LoginBody() {
                         
                         activity.finish()
                     } else {
+                        Log.d("LoginActivity", "Regular user login - calling userViewModel.login")
                         // Regular user login
                         userViewModel.login(email, password) { success, message ->
+                            Log.d("LoginActivity", "Login result: success=$success, message=$message")
                             if (success) {
                                 Toast.makeText(context, message, Toast.LENGTH_LONG).show()
 
