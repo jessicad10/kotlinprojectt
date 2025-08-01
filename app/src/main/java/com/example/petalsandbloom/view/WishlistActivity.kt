@@ -34,6 +34,7 @@ class WishlistActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         // Initialize WishlistViewModel
         wishlistViewModel = ViewModelProvider(
             this,
