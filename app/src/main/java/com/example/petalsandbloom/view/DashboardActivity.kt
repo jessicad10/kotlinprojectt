@@ -31,6 +31,7 @@ import com.example.petalsandbloom.viewmodel.CartViewModelFactory
 import com.example.petalsandbloom.viewmodel.ProductViewModel
 
 class DashboardActivity : ComponentActivity() {
+
     private lateinit var cartViewModel: CartViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
